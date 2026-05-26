@@ -191,22 +191,25 @@ Exemplos:
 
 # Regras Básicas
 
+Somente mensagens Compra/Vende/Procura
+
 Permitido:
 
 * compra e venda de produtos legais
 * prestação de serviços
-* networking
-* educação tecnológica
 * comércio peer-to-peer
+  
 
 Proibido:
 
-* armas
+* armas de fogo
 * drogas
 * bebidas alcoólicas
+* Vapes
 * pets
 * conteúdo adulto / OnlyFans
 * golpes
+* bets
 * spam
 * atividades ilegais
 
@@ -219,8 +222,8 @@ Proibido:
 Utilize:
 
 * Signal
-* Matrix
-* ferramentas open-source
+* Bitchat
+* LoRa
 
 ---
 
