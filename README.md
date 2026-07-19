@@ -1,337 +1,404 @@
-# Agora3-Framework-de-Soberania-Digital
-
+````markdown
 # AGORA3
 
-A open-source framework for building local-first Web3 communities powered by Bitcoin Cash, peer-to-peer commerce and decentralized mesh infrastructure.
+### OffGrid PIX Payment Framework for LoRa Mesh Networks
+
+**AGORA3** is an open-source research framework exploring how **Brazil's PIX payment ecosystem** can be integrated with **LoRa mesh communications** to enable payment requests in environments with limited or intermittent Internet connectivity.
+
+The project investigates a hybrid architecture where a LoRa radio transports **payment instructions**, while an Internet-connected gateway securely interacts with participating Brazilian banks' official APIs.
+
+> **AGORA3 is an experimental engineering project. It is not a financial institution, payment processor, or banking service.**
 
 ---
 
-# O Que é AGORA3
+# Vision
 
-Na Grécia antiga, a “Agora” era a praça pública onde pessoas:
+Modern payment systems assume continuous Internet connectivity.
 
-* comerciavam,
-* compartilhavam ideias,
-* organizavam comunidades,
-* aprendiam,
-* criavam relações locais.
+AGORA3 explores a resilient architecture where:
 
-AGORA3 representa essa mesma ideia adaptada para a era da Web3:
+- LoRa carries payment requests over long distances
+- Mesh networks extend communication coverage
+- A trusted gateway performs authenticated API calls
+- Payment confirmations are transmitted back through the radio network
 
-> comunidades locais conectadas por tecnologia descentralizada.
+The objective is to improve resilience for:
 
----
-
-# Visão
-
-AGORA3 é um framework comunitário open-source focado em:
-
-* economias locais P2P,
-* pagamentos descentralizados,
-* soberania digital,
-* infraestrutura mesh,
-* comunicação resiliente,
-* colaboração comunitária,
-* tecnologia prática aplicada no mundo real.
+- rural communities
+- farms
+- disaster recovery
+- outdoor events
+- remote research stations
+- community mesh networks
+- emergency communications
 
 ---
 
-# Filosofia
+# Project Goals
 
-AGORA3 não é:
+AGORA3 investigates:
 
-* uma empresa financeira,
-* esquema de investimento,
-* promessa de lucro,
-* movimento político,
-* plataforma especulativa.
-
-AGORA3 é:
-
-* um experimento social e tecnológico,
-* uma infraestrutura comunitária local-first,
-* uma rede aberta de colaboração descentralizada.
+- PIX over LoRa
+- Offline payment requests
+- Mesh networking
+- Local-first payment infrastructure
+- Secure gateway authentication
+- Open-source embedded hardware
+- Energy-efficient payment terminals
 
 ---
 
-# O Conceito “Agora da Web3”
+# System Overview
 
-A internet conectou pessoas digitalmente.
-
-AGORA3 busca conectar comunidades localmente utilizando:
-
-* comércio peer-to-peer,
-* pagamentos digitais descentralizados,
-* encontros presenciais,
-* redes mesh,
-* ferramentas open-source,
-* infraestrutura comunitária.
-
-A ideia central é simples:
-
-> qualquer cidade pode criar sua própria microeconomia Web3 local.
-
----
-
-# O Que Estamos Construindo
-
-Cada núcleo AGORA3 pode incluir:
-
-* grupo Signal local
-* marketplace P2P
-* onboarding BCH
-* meetups presenciais
-* comerciantes locais
-* infraestrutura mesh experimental
-* comunicação OffGrid
-* documentação open-source
-
----
-
-# Tecnologia Utilizada
-
-## Pagamentos
-
-* Bitcoin Cash
-
-Escolhido por:
-
-* baixas taxas,
-* rapidez,
-* simplicidade,
-* foco em pagamentos reais.
+```
+┌───────────────────────┐
+│ Merchant Cardputer    │
+│ M5 Cardputer Zero     │
+│                       │
+│ Amount                │
+│ PIX Key               │
+│ Merchant ID           │
+└────────────┬──────────┘
+             │
+        LoRa Packet
+             │
+             ▼
+┌───────────────────────┐
+│ LoRa Gateway          │
+│ Raspberry Pi          │
+│ ESP32 Gateway         │
+│ Linux Server          │
+└────────────┬──────────┘
+             │
+      HTTPS + OAuth
+             │
+             ▼
+┌───────────────────────┐
+│ Brazilian Bank API    │
+│ Official PIX API      │
+└────────────┬──────────┘
+             │
+      Payment Result
+             │
+             ▼
+ Confirmation via LoRa
+```
 
 ---
 
-# Wallets Recomendadas
+# Proposed Hardware
 
-## Mobile
+## Payment Terminal
 
-* [Trust Wallet](https://trustwallet.com/?utm_source=chatgpt.com)
-* [Bitcoin.com Wallet](https://wallet.bitcoin.com/?utm_source=chatgpt.com)
-* [Paytaca Wallet](https://paytaca.com/?utm_source=chatgpt.com)
+- M5 Cardputer
+- M5 Cardputer Zero (future concept)
+- ESP32
+- SX1262 LoRa Module
+- Battery powered
 
-## Desktop
+Functions:
 
-* [Electron Cash](https://electroncash.org/?utm_source=chatgpt.com)
-
----
-
-# Segurança & Soberania Digital
-
-AGORA3 incentiva boas práticas como:
-
-* backup offline de seeds
-* AirGap wallets
-* cold storage
-* MultiSig
-* hardware wallets
-* segurança operacional
+- enter payment amount
+- choose merchant
+- generate request
+- encrypt payload
+- transmit over LoRa
 
 ---
 
-# AirGap & Cold Storage
+## Gateway
 
-Usuários avançados podem experimentar:
+Possible hardware:
 
-* celulares antigos offline
-* Linux Live USB
-* QR signing
-* armazenamento distribuído
-* pendrives bootáveis
-* assinaturas offline
+- Raspberry Pi
+- Mini PC
+- Linux server
+- ESP32 Ethernet Gateway
 
----
+Responsibilities:
 
-# Hardware Wallets
-
-Compatível com:
-
-* [Trezor](https://trezor.io/?utm_source=chatgpt.com)
-* [Ledger](https://www.ledger.com/?utm_source=chatgpt.com)
+- receive LoRa packets
+- verify signatures
+- authenticate with bank
+- call PIX API
+- send confirmation back
 
 ---
 
-# Mesh Networks
+# Why LoRa?
 
-AGORA3 incentiva estudos e testes utilizando:
+Advantages include:
 
-* [Meshtastic](https://meshtastic.org/?utm_source=chatgpt.com)
-* LoRa
-* BitChat
-* Mesh Networking
-* comunicação peer-to-peer
-* infraestrutura OffGrid
+- several kilometers of range
+- extremely low power consumption
+- inexpensive hardware
+- license-free spectrum
+- ideal for rural deployments
 
----
+Potential applications:
 
-# Meetups & Comunidades Locais
-
-Cada cidade pode criar seu próprio núcleo AGORA3.
-
-Exemplos:
-
-* AGORA3 São Lourenço
-* AGORA3 Lisboa
-* AGORA3 Austin
-* AGORA3 Buenos Aires
+- farms
+- festivals
+- emergency response
+- isolated communities
+- backup communication
 
 ---
 
-# Objetivos dos Meetups
+# Banking APIs
 
-* onboarding BCH
-* networking local
-* comércio peer-to-peer
-* testes mesh
-* aprendizado coletivo
-* colaboração open-source
+AGORA3 is designed around official Open Finance and PIX APIs provided by Brazilian financial institutions.
 
----
+Potential integrations include:
 
-# Regras Básicas
+- Banco do Brasil
+- Caixa Econômica Federal
+- Itaú Unibanco
+- Bradesco
+- Santander Brasil
+- Sicredi
+- Sicoob
+- BTG Pactual
+- Inter
+- C6 Bank
+- Nubank (if and when suitable public APIs become available)
+- Banco Central do Brasil Open Finance ecosystem
 
-Somente mensagens Compra/Vende/Procura
-
-Permitido:
-
-* compra e venda de produtos legais
-* prestação de serviços
-* comércio peer-to-peer
-  
-
-Proibido:
-
-* armas de fogo
-* drogas
-* bebidas alcoólicas
-* Vapes
-* pets
-* conteúdo adulto / OnlyFans
-* golpes
-* bets
-* spam
-* atividades ilegais
+Support depends entirely on each institution's published developer APIs, authentication methods, and terms of service.
 
 ---
 
-# Como Criar um Núcleo AGORA3
+# Security Model
 
-## 1. Crie um grupo local
+The payment terminal **never stores banking credentials**.
 
-Utilize:
+Instead:
 
-* Signal
-* Bitchat
-* LoRa
-
----
-
-## 2. Organize encontros pequenos
-
-Comece simples:
-
-* praça,
-* café,
-* coworking,
-* universidade,
-* parque.
+- OAuth tokens remain only on the gateway
+- API secrets remain only on the gateway
+- Device identities use public/private keys
+- LoRa packets are digitally signed
+- Every packet contains:
+  - timestamp
+  - nonce
+  - device ID
+  - signature
+- Replay protection
+- End-to-end encryption for payment requests
 
 ---
 
-## 3. Faça onboarding Web3
+# Example Flow
 
-Ajude novos usuários a:
-
-* criar wallet,
-* receber BCH,
-* fazer backup seguro,
-* entender pagamentos P2P.
-
----
-
-## 4. Incentive economia local
-
-Objetivo inicial:
-
-* pequenos comerciantes,
-* serviços locais,
-* trocas peer-to-peer,
-* circulação econômica comunitária.
+1. Merchant enters payment amount.
+2. Customer confirms the transaction request.
+3. The Cardputer signs and encrypts the request.
+4. The request is transmitted via LoRa.
+5. A trusted gateway receives and validates it.
+6. The gateway calls the bank's official PIX API.
+7. The bank processes the payment.
+8. The gateway receives the response.
+9. Confirmation is sent back over LoRa.
+10. The terminal displays the payment status.
 
 ---
 
-## 5. Compartilhe experiências
+# Network Architecture
 
-Publique:
+```
+Cardputer
+      │
+      ▼
+LoRa Mesh
+      │
+      ▼
+Gateway
+      │
+ HTTPS
+      │
+      ▼
+Bank API
+      │
+      ▼
+PIX Network
+```
 
-* fotos,
-* tutoriais,
-* mapas,
-* melhorias,
-* documentação técnica.
+---
+
+# Software Stack
+
+Embedded
+
+- ESP-IDF
+- Arduino Framework
+- FreeRTOS
+
+Gateway
+
+- Go
+- Rust
+- Python
+- Node.js
+
+Communication
+
+- LoRa
+- Meshtastic-inspired routing concepts
+- MQTT (optional)
+- HTTPS
+- REST APIs
+
+Security
+
+- TLS
+- OAuth2
+- Device certificates
+- Ed25519 signatures
+- AES-256 encrypted payloads
+
+---
+
+# Repository Structure
+
+```
+firmware/
+    cardputer/
+
+gateway/
+    api-client/
+    lora-service/
+    auth/
+
+protocol/
+    packet-specification/
+    encryption/
+
+docs/
+    architecture/
+    hardware/
+    security/
+
+examples/
+
+simulations/
+```
+
+---
+
+# Possible Future Features
+
+- QR Code fallback
+- NFC support
+- Bluetooth provisioning
+- Wi-Fi fallback
+- Satellite gateway integration
+- Solar-powered relay stations
+- Multi-bank support
+- Offline transaction queue
+- Mesh routing optimization
+- Remote firmware updates
+
+---
+
+# Research Topics
+
+- LoRa latency
+- Packet fragmentation
+- Secure key exchange
+- Offline authentication
+- Gateway redundancy
+- Mesh routing
+- Power optimization
+- Cryptographic signing
+- Rural communication reliability
+
+---
+
+# Limitations
+
+AGORA3 **does not** make PIX itself operate offline.
+
+Instead, it explores an architecture where:
+
+- payment instructions travel over LoRa,
+- a connected gateway performs the online banking transaction,
+- confirmations are relayed back through the mesh.
+
+An Internet-connected gateway is still required for final settlement with the banking system.
+
+---
+
+# Intended Applications
+
+- Remote farms
+- Community markets
+- Outdoor events
+- Emergency communications
+- Disaster recovery
+- Scientific expeditions
+- Rural commerce
+- Educational research
+- IoT payment experiments
 
 ---
 
 # Roadmap
 
-* [ ] Grupo local
-* [ ] Primeiro meetup
-* [ ] Primeiros pagamentos BCH
-* [ ] Primeiros comerciantes
-* [ ] Guias de onboarding
-* [ ] Testes mesh
-* [ ] Testes LoRa
-* [ ] AirGap guides
-* [ ] Mapa comunitário
-* [ ] Conexão entre núcleos
+- [ ] LoRa packet specification
+- [ ] Cryptographic protocol
+- [ ] Cardputer firmware
+- [ ] Gateway implementation
+- [ ] PIX API abstraction layer
+- [ ] Multi-bank adapter interface
+- [ ] Mesh routing support
+- [ ] End-to-end encryption
+- [ ] Simulation environment
+- [ ] Hardware reference designs
+- [ ] Developer documentation
 
 ---
 
-# Contribuições
+# Contributing
 
-Contribuições são bem-vindas:
+Contributions are welcome in areas such as:
 
-* documentação
-* desenvolvimento
-* traduções
-* design
-* testes mesh
-* hardware
-* onboarding
-* experiências locais
-
----
-
-# Importante
-
-Cada participante é responsável por:
-
-* cumprir as leis locais,
-* proteger suas chaves,
-* suas negociações,
-* sua segurança operacional.
-
-AGORA3 não atua como intermediário financeiro.
+- Embedded systems
+- ESP32 development
+- LoRa networking
+- Cryptography
+- Open Finance
+- API integrations
+- Security reviews
+- Documentation
+- Hardware design
+- Testing
 
 ---
 
-# Visão de Longo Prazo
+# Legal Notice
 
-Uma rede global de comunidades locais conectadas por:
+AGORA3 is an open-source research project.
 
-* Web3,
-* pagamentos descentralizados,
-* comércio peer-to-peer,
-* infraestrutura mesh,
-* colaboração open-source,
-* economias locais interoperáveis.
+It is **not**:
+
+- a bank
+- a payment institution
+- a financial intermediary
+- a PIX provider
+
+Users and implementers are solely responsible for complying with applicable laws, banking regulations, API licensing terms, and security requirements.
+
+---
+
+# License
+
+MIT License
 
 ---
 
 # AGORA3
 
-> Local communities.
-> Real commerce.
-> Open infrastructure.
-> Web3 in the real world.
+> **Resilient payments. Open hardware. Mesh networking. Secure gateways.**
+>
+> **Building the future of resilient payment infrastructure, one packet at a time.**
+````
